@@ -15,7 +15,13 @@ From the project folder on Windows:
 .\mvnw.cmd spring-boot:run
 ```
 
-Open [http://localhost:8080](http://localhost:8080). On first startup, the app creates 25 sample employees (including the original four) and one pending leave request. The H2 console is available at [http://localhost:8080/h2-console](http://localhost:8080/h2-console) with JDBC URL `jdbc:h2:file:./data/leave-management`, username `sa`, and an empty password.
+Open [http://localhost:8080](http://localhost:8080). On first startup, the app creates 25 sample employees (including the original four) and one pending leave request. H2 stores the local database in `./data/leave-management` with username `sa` and no password.
+
+## Deploy to Render
+
+The repository includes a Dockerfile and `render.yaml` for deployment as a Render web service. Create a new Blueprint in Render and select this GitHub repository; Render will build the container and provide the deployed URL after the service becomes healthy. The service listens on Render's assigned port and serves the dashboard at `/`.
+
+The Render configuration uses an in-memory H2 database for the demo, so data is reset when the service restarts or redeploys. The application has no authentication; use sample data only and do not enter real employee information.
 
 Run the tests with:
 
