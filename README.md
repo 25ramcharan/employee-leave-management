@@ -9,13 +9,22 @@ A Spring Boot 4 application for managing employees, leave balances, and leave re
 
 ## Run
 
-From the repository root on Windows:
+Build the React frontend once from the repository root:
+
+```powershell
+npm --prefix frontend ci
+npm --prefix frontend run build
+```
+
+Then start Spring Boot from the repository root on Windows:
 
 ```powershell
 .\backend\mvnw.cmd -f backend\pom.xml spring-boot:run
 ```
 
 Open [http://localhost:8080](http://localhost:8080). On first startup, the app creates 25 sample employees (including the original four) and one pending leave request. H2 stores the local database in `./data/leave-management` with username `sa` and no password.
+
+For frontend development with Vite, start Spring Boot as above and run `npm --prefix frontend run dev` in another terminal. Vite serves the React UI and proxies `/api` requests to Spring Boot.
 
 ## Deploy to Render
 
@@ -38,7 +47,7 @@ Run the backend tests from the repository root with:
 - Approve or reject pending requests with an optional review note
 - Deduct leave days from the employee balance only after approval
 - Filter requests by status
-- Persistent local H2 database and responsive static dashboard
+- Persistent local H2 database and responsive React dashboard
 
 ## API
 

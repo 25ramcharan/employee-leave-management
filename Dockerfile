@@ -1,8 +1,16 @@
+FROM node:22-alpine AS frontend-build
+WORKDIR /workspace/frontend
+COPY frontend/package*.json ./
+RUN npm ci
+COPY frontend/ ./
+RUN npm run build
+
 FROM maven:3.9.9-eclipse-temurin-17 AS build
 WORKDIR /workspace
 COPY backend/pom.xml backend/pom.xml
 COPY backend/src backend/src
-COPY frontend frontend
+COPY backend/.mvn backend/.mvn
+COPY --from=frontend-build /workspace/frontend/dist /workspace/frontend/dist
 RUN mvn -B -f backend/pom.xml -DskipTests package
 
 FROM eclipse-temurin:17-jre-jammy
