@@ -1,6 +1,6 @@
 # Employee Leave Management
 
-A Spring Boot 4 application for managing employees, leave balances, and leave requests. The interface is served from `src/main/resources/static` and talks to a JSON API backed by Spring Data JPA.
+A Spring Boot 4 application for managing employees, leave balances, and leave requests. The frontend lives in `frontend/`; the Spring Boot API and persistence layer live in `backend/`. The backend packages the frontend into the application so it is served from `/` alongside the JSON API.
 
 ## Requirements
 
@@ -9,10 +9,10 @@ A Spring Boot 4 application for managing employees, leave balances, and leave re
 
 ## Run
 
-From the project folder on Windows:
+From the repository root on Windows:
 
 ```powershell
-.\mvnw.cmd spring-boot:run
+.\backend\mvnw.cmd -f backend\pom.xml spring-boot:run
 ```
 
 Open [http://localhost:8080](http://localhost:8080). On first startup, the app creates 25 sample employees (including the original four) and one pending leave request. H2 stores the local database in `./data/leave-management` with username `sa` and no password.
@@ -23,10 +23,10 @@ The repository includes a Dockerfile and `render.yaml` for deployment as a Rende
 
 The Render configuration uses an in-memory H2 database for the demo, so data is reset when the service restarts or redeploys. The application has no authentication; use sample data only and do not enter real employee information.
 
-Run the tests with:
+Run the backend tests from the repository root with:
 
 ```powershell
-.\mvnw.cmd test
+.\backend\mvnw.cmd -f backend\pom.xml test
 ```
 
 ## Features
