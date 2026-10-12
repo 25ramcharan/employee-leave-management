@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 async function api(url, options = {}) {
   const response = await fetch(url, {
